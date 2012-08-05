@@ -1,4 +1,6 @@
-Manifakture-jQuery-Plugins
-==========================
+JQUERY PLUGINS
 
-JQuery Plugins
+1. MNF.IE.WARNING
+2. MNF.FORM.VALIDATOR
+
+====
