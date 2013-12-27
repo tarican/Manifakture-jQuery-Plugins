@@ -1,10 +1,19 @@
 /*
  * 
- * Manifaktüre 2012
+ * powered by Manifaktüre
  * 
  * @author      Tolga Arican
  * @website     http://www.manifakture.com
- * @version     1.0.0
+ * @version     1.0.3
+ * 
+ * 1.0.3
+ * Bug fix
+ * 
+ * 1.0.2
+ * Added support for IE10+
+ * 
+ * 1.0.1
+ * First release
  * 
  */
 
@@ -13,8 +22,11 @@
     $.UFIEWarning = function(options) {
         
         var mo = $.extend({}, $.UFIEWarning.defaults, options);
+        
+        var verArr = $.browser.version.split('.');
+        var verNum = Number(verArr[0]);
 
-        if ((!$.browser.msie || ($.browser.msie && $.browser.version.slice(0,1) == '9')) && !mo.force) return true;
+        if ((!$.browser.msie || ($.browser.msie && verNum >= 9)) && !mo.force) return true;
         
         var browsers = '';
         
@@ -42,7 +54,9 @@
         $('#uf-ie-warning-inner').css({ 'margin-top': -1*$('#uf-ie-warning-inner').height()/2 });
         $('#uf-ie-warning').show();
         
-        setTimeout(function() { $.UFIEWarning.close(); },mo.autoTime);
+        if (mo.autoClose) {
+            setTimeout(function() { $.UFIEWarning.close(); },mo.autoTime);
+        }
     }
     
     $.UFIEWarning.close = function() {
@@ -53,13 +67,14 @@
     $.UFIEWarning.defaults = {
         autoTime        : 12000,
         force           : false,
+        autoClose       : false,
         firefox         : true,
-        rockmelt        : true,
+        rockmelt        : false,
         chrome          : true,
         safari          : true,
         opera           : true,
-        warning         : 'Ouch! You seem to have Internet Explorer (Still?)... We suggest you to download something new, something better, something faster, something better dude! Try some of those:',
-        cont            : 'Press here to continue',
+        warning         : 'O da nesi!? Internet Explorer görüyoruz, senelerden sonra... Daha iyi, daha hızlı, daha güvenli modern bir tarayıcıya geçmenin vakti gelmiş. Alttaki tarayıcılardan birini deneyin kesinlikle!',
+        cont            : 'Yine de Siteye Gir',
         bgColor         : '#0000cd',
         txColor         : '#ffffff'
     };
